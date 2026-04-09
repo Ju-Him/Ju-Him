@@ -1,0 +1,130 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ju-Him | Documentaries</title>
+  <link rel="stylesheet" href="style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600&family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet"/>
+  <style>
+    .doc-hero{text-align:center;padding:80px 0 40px}
+    .doc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:28px;margin-top:40px}
+    .doc-card{background:rgba(10,8,3,.92);border:1px solid rgba(201,168,76,.2);overflow:hidden;transition:all .3s;cursor:pointer;display:flex;flex-direction:column}
+    .doc-card:hover{border-color:var(--gold);transform:translateY(-5px);box-shadow:0 20px 50px rgba(201,168,76,.12)}
+    .doc-card-top{padding:32px 28px 20px;border-bottom:1px solid rgba(201,168,76,.1);position:relative}
+    .doc-symbol{font-size:3rem;color:var(--gold);text-shadow:0 0 20px rgba(201,168,76,.4);margin-bottom:14px;display:block}
+    .doc-category{font-family:"Cinzel",serif;font-size:.65rem;color:var(--gold-dim);letter-spacing:3px;margin-bottom:10px;text-transform:uppercase}
+    .doc-card h2{font-family:"Cinzel Decorative",cursive;font-size:1.15rem;color:var(--gold-light);line-height:1.4;margin-bottom:10px}
+    .doc-subtitle{font-size:.88rem;color:var(--text-dim);line-height:1.7;font-style:italic}
+    .doc-card-bottom{padding:16px 28px;display:flex;justify-content:space-between;align-items:center;margin-top:auto}
+    .doc-meta{font-family:"Cinzel",serif;font-size:.7rem;color:var(--text-dim);letter-spacing:1px}
+    .doc-tags{display:flex;gap:6px;flex-wrap:wrap;padding:0 28px 20px}
+    .doc-tag{font-family:"Cinzel",serif;font-size:.6rem;padding:3px 8px;border:1px solid rgba(201,168,76,.2);color:var(--text-dim);letter-spacing:1px}
+    .read-doc-btn{font-family:"Cinzel",serif;font-size:.75rem;padding:8px 20px;background:linear-gradient(135deg,var(--gold-dim),var(--gold));color:#000;border:none;cursor:pointer;letter-spacing:2px;transition:all .3s;white-space:nowrap}
+    .read-doc-btn:hover{box-shadow:0 0 20px rgba(201,168,76,.4)}
+    .featured-banner{background:linear-gradient(135deg,rgba(139,26,26,.15),rgba(201,168,76,.08));border:1px solid var(--gold-dim);padding:32px 40px;margin-bottom:50px;display:flex;gap:32px;align-items:center;flex-wrap:wrap}
+    .featured-label{font-family:"Cinzel",serif;font-size:.7rem;color:var(--gold);letter-spacing:4px;margin-bottom:10px}
+    .featured-title{font-family:"Cinzel Decorative",cursive;font-size:1.6rem;color:var(--gold-light);margin-bottom:10px;line-height:1.3}
+    .featured-sub{font-size:.95rem;color:var(--text-dim);line-height:1.8;font-style:italic;max-width:600px}
+    .featured-symbol{font-size:5rem;color:var(--gold);text-shadow:0 0 30px rgba(201,168,76,.4);flex-shrink:0}
+  </style>
+</head>
+<body>
+<canvas id="particles"></canvas>
+<div class="fog"></div><div class="fog fog2"></div>
+
+<nav class="navbar">
+  <a href="index.html" class="brand" style="text-decoration:none">Ju-Him</a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="index.html#catalog">Catalog</a></li>
+    <li><a href="documentaries.html" style="color:var(--gold)">Documentaries</a></li>
+    <li><a href="index.html#comics">Comics</a></li>
+    <li><a href="index.html#gods">Gods</a></li>
+    <li><a href="search.html">&#128269; Search</a></li>
+  </ul>
+  <div class="nav-toggle" id="navToggle">&#9776;</div>
+</nav>
+
+<div class="wrapper">
+  <div class="doc-hero">
+    <div class="rune-line">&#10008; &#10022; &#10008; &#10022; &#10008; &#10022; &#10008;</div>
+    <h1 class="section-title" style="font-size:clamp(1.8rem,4vw,3rem);margin-bottom:12px">&#10022; Ancient Documentaries &#10022;</h1>
+    <p class="section-sub">Full written documentaries on the people who shaped the ancient world.<br/>Real history. Real people. Told the way it deserves to be told.</p>
+    <div class="rune-line">&#10008; &#10022; &#10008; &#10022; &#10008; &#10022; &#10008;</div>
+  </div>
+
+  <div class="featured-banner" id="featuredBanner"></div>
+  <div class="doc-grid" id="docGrid"></div>
+</div>
+
+<div class="modal-overlay" id="storyModal">
+  <div class="modal-box" id="articleModalBox">
+    <button class="modal-close" onclick="closeModal()">&#10005;</button>
+    <div id="articleContent"></div>
+  </div>
+</div>
+
+<script src="data.js"></script>
+<script src="articles.js"></script>
+<script src="script.js"></script>
+<script>
+function buildDocPage(){
+  var grid = document.getElementById("docGrid");
+  var featured = document.getElementById("featuredBanner");
+  if(!grid || typeof ARTICLES === "undefined") return;
+
+  // Featured = first article
+  var f = ARTICLES[0];
+  featured.innerHTML = '<div class="featured-symbol">'+f.symbol+'</div><div><div class="featured-label">&#10022; FEATURED DOCUMENTARY &#10022;</div><div class="featured-title">'+f.title+'</div><p class="featured-sub">'+f.subtitle+'</p><br/><button class="read-doc-btn" onclick="openArticle(\''+f.id+'\')">Read Full Documentary</button></div>';
+
+  ARTICLES.forEach(function(a){
+    var tags = a.tags.map(function(t){ return '<span class="doc-tag">'+t+'</span>'; }).join("");
+    var card = document.createElement("div");
+    card.className = "doc-card hidden-init";
+    card.innerHTML = '<div class="doc-card-top"><span class="doc-symbol">'+a.symbol+'</span><div class="doc-category">'+a.category+' &bull; '+a.date+'</div><h2>'+a.title+'</h2><p class="doc-subtitle">'+a.subtitle+'</p></div><div class="doc-tags">'+tags+'</div><div class="doc-card-bottom"><span class="doc-meta">'+a.readTime+'</span><button class="read-doc-btn" onclick="openArticle(\''+a.id+'\')">Read Now</button></div>';
+    grid.appendChild(card);
+    var obs2 = new IntersectionObserver(function(entries){ entries.forEach(function(e){ if(e.isIntersecting){e.target.classList.add("revealed");obs2.unobserve(e.target);} }); },{threshold:0.08});
+    obs2.observe(card);
+  });
+}
+
+function openArticle(id){
+  var article = null;
+  for(var i=0;i<ARTICLES.length;i++){ if(ARTICLES[i].id===id){article=ARTICLES[i];break;} }
+  if(!article) return;
+
+  var html = '<div style="margin-bottom:8px"><span style="font-family:Cinzel,serif;font-size:.7rem;color:var(--gold-dim);letter-spacing:3px">'+article.category+' &bull; '+article.date+'</span></div>';
+  html += '<h2 class="modal-title" style="font-size:clamp(1.3rem,3vw,2rem);line-height:1.3;margin-bottom:16px">'+article.title+'</h2>';
+  html += '<p style="font-style:italic;color:var(--text-dim);font-size:1rem;line-height:1.8;border-left:3px solid var(--gold-dim);padding-left:16px;margin-bottom:32px">'+article.subtitle+'</p>';
+  html += '<div class="modal-badge" style="margin-bottom:24px">'+article.readTime+'</div>';
+  html += '<p style="font-size:1.05rem;line-height:2;color:var(--text);margin-bottom:28px;font-style:italic;border-bottom:1px solid rgba(201,168,76,.15);padding-bottom:28px">'+article.intro+'</p>';
+
+  article.body.forEach(function(block){
+    if(block.type==="heading"){
+      html += '<h3 style="font-family:Cinzel,serif;font-size:1.15rem;color:var(--gold);letter-spacing:2px;margin:32px 0 16px;padding-top:8px;border-top:1px solid rgba(201,168,76,.1)">'+block.text+'</h3>';
+    } else if(block.type==="para"){
+      html += '<p style="font-size:1rem;line-height:2;color:var(--text);margin-bottom:18px">'+block.text+'</p>';
+    } else if(block.type==="quote"){
+      html += '<blockquote style="border-left:3px solid var(--gold);padding:16px 24px;margin:28px 0;background:rgba(201,168,76,.04)"><p style="font-style:italic;font-size:1.05rem;color:var(--text);line-height:1.9;margin-bottom:10px">"'+block.text+'"</p><cite style="font-family:Cinzel,serif;font-size:.75rem;color:var(--gold-dim);letter-spacing:1px">&mdash; '+block.author+'</cite></blockquote>';
+    } else if(block.type==="highlight"){
+      html += '<div style="background:linear-gradient(135deg,rgba(139,26,26,.12),rgba(201,168,76,.06));border:1px solid var(--gold-dim);padding:20px 24px;margin:28px 0"><p style="font-family:Cinzel,serif;font-size:.9rem;color:var(--gold-light);line-height:1.8;letter-spacing:.5px">'+block.text+'</p></div>';
+    }
+  });
+
+  document.getElementById("articleContent").innerHTML = html;
+  document.getElementById("storyModal").classList.add("open");
+  document.getElementById("articleModalBox").scrollTop = 0;
+  document.body.style.overflow = "hidden";
+}
+
+function closeModal(){
+  document.getElementById("storyModal").classList.remove("open");
+  document.body.style.overflow = "";
+}
+document.getElementById("storyModal").addEventListener("click",function(e){ if(e.target===this) closeModal(); });
+
+buildDocPage();
+</script>
+</body>
+</html>

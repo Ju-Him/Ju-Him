@@ -1,0 +1,173 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ju-Him Search | The Ancient Realm</title>
+  <link rel="stylesheet" href="style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600&family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet"/>
+  <style>
+    .search-page { min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:flex-start; padding:120px 24px 80px; position:relative; z-index:2; }
+    .search-logo { font-family:'Cinzel Decorative',cursive; font-size:clamp(3rem,8vw,5.5rem); color:var(--gold-light); text-shadow:0 0 40px rgba(201,168,76,.7),0 0 100px rgba(201,168,76,.3); letter-spacing:10px; margin-bottom:8px; animation:titlePulse 4s ease-in-out infinite; }
+    .search-tagline { font-family:'Cinzel',serif; color:var(--text-dim); letter-spacing:4px; font-size:.9rem; margin-bottom:48px; font-style:italic; }
+    .main-search-wrap { width:100%; max-width:680px; position:relative; margin-bottom:20px; }
+    .main-search-input { width:100%; padding:18px 60px 18px 24px; background:rgba(10,8,3,.95); border:1px solid var(--gold-dim); color:var(--text); font-family:'Cinzel',serif; font-size:1rem; letter-spacing:1px; outline:none; transition:border-color .3s,box-shadow .3s; }
+    .main-search-input:focus { border-color:var(--gold); box-shadow:0 0 30px rgba(201,168,76,.2); }
+    .main-search-input::placeholder { color:var(--text-dim); }
+    .search-icon-btn { position:absolute; right:0; top:0; bottom:0; width:56px; background:linear-gradient(135deg,var(--gold-dim),var(--gold)); border:none; color:#000; font-size:1.2rem; cursor:pointer; transition:all .3s; }
+    .search-icon-btn:hover { box-shadow:0 0 20px rgba(201,168,76,.5); }
+    .search-cats { display:flex; gap:10px; flex-wrap:wrap; justify-content:center; margin-bottom:40px; }
+    .search-results { width:100%; max-width:800px; }
+    .result-count { font-family:'Cinzel',serif; font-size:.85rem; color:var(--text-dim); margin-bottom:20px; letter-spacing:2px; text-align:center; }
+    .result-card { background:rgba(10,8,3,.9); border:1px solid rgba(201,168,76,.2); padding:24px 28px; margin-bottom:16px; display:flex; gap:20px; align-items:flex-start; transition:all .3s; cursor:pointer; }
+    .result-card:hover { border-color:var(--gold); transform:translateX(4px); box-shadow:0 0 20px rgba(201,168,76,.1); }
+    .result-symbol { font-family:serif; font-size:2.2rem; color:var(--gold); min-width:50px; text-align:center; text-shadow:0 0 12px rgba(201,168,76,.4); }
+    .result-info h3 { font-family:'Cinzel',serif; font-size:1rem; color:var(--gold-light); margin-bottom:6px; letter-spacing:1px; }
+    .result-info p { font-size:.88rem; color:var(--text-dim); line-height:1.6; }
+    .result-type { font-family:'Cinzel',serif; font-size:.65rem; padding:3px 10px; background:var(--gold-dim); color:var(--white); display:inline-block; margin-top:8px; letter-spacing:1px; }
+    .no-results { text-align:center; padding:60px 20px; color:var(--text-dim); font-style:italic; font-size:1.1rem; }
+    .search-home-link { font-family:'Cinzel',serif; color:var(--gold-dim); text-decoration:none; font-size:.85rem; letter-spacing:2px; margin-bottom:40px; display:inline-block; transition:color .3s; }
+    .search-home-link:hover { color:var(--gold); }
+    .trending { width:100%; max-width:680px; margin-bottom:40px; }
+    .trending h3 { font-family:'Cinzel',serif; font-size:.9rem; color:var(--gold-dim); letter-spacing:3px; margin-bottom:16px; text-align:center; }
+    .trending-tags { display:flex; gap:10px; flex-wrap:wrap; justify-content:center; }
+    .trending-tag { font-family:'Cinzel',serif; font-size:.75rem; padding:8px 16px; background:rgba(10,8,3,.8); border:1px solid rgba(201,168,76,.2); color:var(--text-dim); cursor:pointer; transition:all .3s; text-decoration:none; }
+    .trending-tag:hover { border-color:var(--gold); color:var(--gold); }
+  </style>
+</head>
+<body>
+<canvas id="particles"></canvas>
+<div class="fog"></div>
+<div class="fog fog2"></div>
+
+<nav class="navbar">
+  <a href="index.html" class="brand" style="text-decoration:none;">Ju-Him</a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="index.html#catalog">Catalog</a></li>
+    <li><a href="index.html#genres">Genres</a></li>
+    <li><a href="index.html#comics">Comics</a></li>
+    <li><a href="index.html#gods">Gods</a></li>
+    <li><a href="search.html" class="nav-search-link">&#128269; Search</a></li>
+  </ul>
+  <div class="nav-toggle" id="navToggle">&#9776;</div>
+</nav>
+
+<div class="search-page">
+  <a href="index.html" class="search-home-link">&#8592; Return to the Ancient Realm</a>
+  <div class="search-logo">Ju-Him</div>
+  <p class="search-tagline">Search the Ancient Realm</p>
+
+  <div class="main-search-wrap">
+    <input type="text" class="main-search-input" id="mainSearch" placeholder="Search myths, gods, stories, comics..." autofocus/>
+    <button class="search-icon-btn" onclick="doSearch()">&#128269;</button>
+  </div>
+
+  <div class="search-cats">
+    <button class="tag active" data-scat="all">All</button>
+    <button class="tag" data-scat="story">Stories</button>
+    <button class="tag" data-scat="god">Gods</button>
+    <button class="tag" data-scat="comic">Comics</button>
+  </div>
+
+  <div class="trending" id="trendingSection">
+    <h3>&#10022; Popular Searches &#10022;</h3>
+    <div class="trending-tags">
+      <span class="trending-tag" onclick="quickSearch('dragon')">Dragon</span>
+      <span class="trending-tag" onclick="quickSearch('zeus')">Zeus</span>
+      <span class="trending-tag" onclick="quickSearch('norse')">Norse</span>
+      <span class="trending-tag" onclick="quickSearch('samurai')">Samurai</span>
+      <span class="trending-tag" onclick="quickSearch('egyptian')">Egyptian</span>
+      <span class="trending-tag" onclick="quickSearch('oni')">Oni</span>
+      <span class="trending-tag" onclick="quickSearch('moon')">Moon</span>
+      <span class="trending-tag" onclick="quickSearch('war')">War</span>
+      <span class="trending-tag" onclick="quickSearch('odin')">Odin</span>
+      <span class="trending-tag" onclick="quickSearch('shiva')">Shiva</span>
+    </div>
+  </div>
+
+  <div class="search-results" id="searchResults"></div>
+</div>
+
+<div class="modal-overlay" id="storyModal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal()">&#10005;</button>
+    <h2 class="modal-title" id="modalTitle"></h2>
+    <div class="modal-badge" id="modalBadge"></div>
+    <div class="modal-body" id="modalBody"></div>
+  </div>
+</div>
+
+<script src="data.js"></script>
+<script src="script.js"></script>
+<script>
+var currentCat = "all";
+document.querySelectorAll(".tag[data-scat]").forEach(function(tag){
+  tag.addEventListener("click", function(){
+    document.querySelectorAll(".tag[data-scat]").forEach(function(t){t.classList.remove("active");});
+    tag.classList.add("active");
+    currentCat = tag.getAttribute("data-scat");
+    doSearch();
+  });
+});
+
+document.getElementById("mainSearch").addEventListener("keydown", function(e){
+  if(e.key === "Enter") doSearch();
+});
+document.getElementById("mainSearch").addEventListener("input", function(){
+  if(this.value.length > 1) doSearch();
+  if(this.value.length === 0){ document.getElementById("searchResults").innerHTML=""; document.getElementById("trendingSection").style.display="block"; }
+});
+
+function quickSearch(term){
+  document.getElementById("mainSearch").value = term;
+  doSearch();
+}
+
+function doSearch(){
+  var query = document.getElementById("mainSearch").value.toLowerCase().trim();
+  var resultsDiv = document.getElementById("searchResults");
+  document.getElementById("trendingSection").style.display = "none";
+  if(!query){ resultsDiv.innerHTML=""; document.getElementById("trendingSection").style.display="block"; return; }
+
+  var results = [];
+
+  if(currentCat === "all" || currentCat === "story"){
+    STORIES.forEach(function(s){
+      if(s.title.toLowerCase().includes(query)||s.short.toLowerCase().includes(query)||s.category.toLowerCase().includes(query)||s.badge.toLowerCase().includes(query)){
+        results.push({ type:"Story", symbol:s.symbol, title:s.title, desc:s.short, badge:s.badge, action:"openStory('"+s.id+"')" });
+      }
+    });
+  }
+  if(currentCat === "all" || currentCat === "god"){
+    GODS.forEach(function(g){
+      if(g.name.toLowerCase().includes(query)||g.role.toLowerCase().includes(query)||g.pantheon.toLowerCase().includes(query)||g.desc.toLowerCase().includes(query)){
+        results.push({ type:"God", symbol:g.symbol, title:g.name, desc:g.role+" &mdash; "+g.desc.substring(0,100)+"...", badge:g.pantheon.charAt(0).toUpperCase()+g.pantheon.slice(1)+" Pantheon", action:"" });
+      }
+    });
+  }
+  if(currentCat === "all" || currentCat === "comic"){
+    COMICS.forEach(function(c){
+      if(c.title.toLowerCase().includes(query)||c.desc.toLowerCase().includes(query)||c.meta.toLowerCase().includes(query)){
+        results.push({ type:"Comic", symbol:c.symbol, title:c.title, desc:c.desc, badge:"Ju-Him Comics", action:"openComic('"+c.id+"')" });
+      }
+    });
+  }
+
+  if(results.length === 0){
+    resultsDiv.innerHTML = "<div class='no-results'><p>&#10022; No ancient records found for <em>\""+query+"\"</em> &#10022;</p><p style='margin-top:12px;font-size:.85rem;'>Try searching: dragon, zeus, norse, samurai, egyptian</p></div>";
+    return;
+  }
+
+  var html = "<div class='result-count'>"+results.length+" ancient record"+(results.length!==1?"s":"")+" found for \""+query+"\"</div>";
+  results.forEach(function(r){
+    html += "<div class='result-card' "+(r.action?"onclick=\""+r.action+"\"":"")+">";
+    html += "<div class='result-symbol'>"+r.symbol+"</div>";
+    html += "<div class='result-info'><h3>"+r.title+"</h3><p>"+r.desc+"</p><span class='result-type'>"+r.type+" &bull; "+r.badge+"</span></div>";
+    html += "</div>";
+  });
+  resultsDiv.innerHTML = html;
+}
+</script>
+</body>
+</html>

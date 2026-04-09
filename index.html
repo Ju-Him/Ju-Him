@@ -1,0 +1,205 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ju-Him | The Ancient Realm</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600&family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet"/>
+</head>
+<body>
+<canvas id="particles"></canvas>
+<div class="fog"></div>
+<div class="fog fog2"></div>
+
+<!-- NAV -->
+<nav class="navbar">
+  <div class="brand">Ju-Him</div>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="#catalog">Catalog</a></li>
+    <li><a href="#genres">Genres</a></li>
+    <li><a href="#comics">Comics</a></li>
+    <li><a href="#timeline">Timeline</a></li>
+    <li><a href="#gods">Gods</a></li>
+    <li><a href="search.html" class="nav-search-link">&#128269; Search</a></li>
+  </ul>
+  <div class="nav-toggle" id="navToggle">&#9776;</div>
+</nav>
+
+<div class="wrapper" id="home">
+
+  <!-- HEADER -->
+  <header>
+    <div class="rune-line">&#10008; &#10022; &#10008; &#10022; &#10008; &#10022; &#10008; &#10022; &#10008;</div>
+    <div class="brand-header">Ju-Him</div>
+    <h1 class="title">
+      <span class="kanji">&#21476;&#20195;&#12398;&#39098;&#22495;</span><br/>The Ancient Realm
+    </h1>
+    <p class="subtitle">&#8212; Where forgotten souls find their path &#8212;</p>
+    <div class="rune-line">&#10008; &#10022; &#10008; &#10022; &#10008; &#10022; &#10008; &#10022; &#10008;</div>
+    <div class="header-btns">
+      <a href="#catalog" class="btn-gold">Explore Catalog</a>
+      <a href="#comics" class="btn-outline">Read Comics</a>
+      <a href="search.html" class="btn-outline">&#128269; Search Realm</a>
+    </div>
+  </header>
+
+  <!-- WELCOME -->
+  <section class="scroll-card">
+    <div class="scroll-inner">
+      <h2>&#10022; A Message to the Wanderer &#10022;</h2>
+      <p>You have crossed the veil between worlds, traveler.<br/>Whether you arrive weary from battle or burning with purpose &#8212; <strong>you are welcome here.</strong></p>
+      <p>This realm was carved from the oldest stars, written in ink that does not fade, spoken in tongues older than the gods themselves.</p>
+      <p class="italic">"The one who seeks shall always find. The one who knocks shall have the gate opened."</p>
+    </div>
+  </section>
+
+  <!-- PILLARS -->
+  <section class="pillars">
+    <div class="pillar"><div class="pillar-icon">&#9876;</div><h3>Honor</h3><p>Every soul that walks this path carries the weight of their choices. Walk with integrity and the realm rewards you.</p></div>
+    <div class="pillar"><div class="pillar-icon">&#127800;</div><h3>Peace</h3><p>Even the fiercest warrior knows stillness. In silence, the ancient wisdom speaks loudest.</p></div>
+    <div class="pillar"><div class="pillar-icon">&#128302;</div><h3>Power</h3><p>Not the power to destroy &#8212; but the power to create, to protect, and to rise beyond what you were yesterday.</p></div>
+  </section>
+
+  <!-- ANCIENT FACTS TICKER -->
+  <section class="ticker-section">
+    <div class="ticker-label">&#10022; Ancient Knowledge &#10022;</div>
+    <div class="ticker-wrap"><div class="ticker-track" id="tickerTrack"></div></div>
+  </section>
+
+  <!-- CATALOG -->
+  <section class="catalog-section" id="catalog">
+    <h2 class="section-title">&#10022; Mythical Stories Catalog &#10022;</h2>
+    <p class="section-sub">Ancient tales from across the world &#8212; explore, discover, get lost.</p>
+    <div class="catalog-controls">
+      <input type="text" id="searchInput" placeholder="Search stories..." class="search-bar"/>
+      <div class="filter-tags">
+        <button class="tag active" data-filter="all">All</button>
+        <button class="tag" data-filter="japanese">Japanese</button>
+        <button class="tag" data-filter="greek">Greek</button>
+        <button class="tag" data-filter="norse">Norse</button>
+        <button class="tag" data-filter="chinese">Chinese</button>
+        <button class="tag" data-filter="egyptian">Egyptian</button>
+        <button class="tag" data-filter="celtic">Celtic</button>
+        <button class="tag" data-filter="mesopotamian">Mesopotamian</button>
+        <button class="tag" data-filter="aztec">Aztec</button>
+        <button class="tag" data-filter="hindu">Hindu</button>
+      </div>
+    </div>
+    <div class="catalog-grid" id="catalogGrid"></div>
+  </section>
+
+  <!-- ANCIENT TIMELINE -->
+  <section class="timeline-section" id="timeline">
+    <h2 class="section-title">&#10022; Timeline of the Ancient World &#10022;</h2>
+    <p class="section-sub">From the birth of civilization to the fall of empires.</p>
+    <div class="timeline">
+      <div class="tl-item left"><div class="tl-dot"></div><div class="tl-content"><h3>3500 BCE</h3><p>Sumer rises in Mesopotamia. The first cities, the first writing, the first gods with names.</p></div></div>
+      <div class="tl-item right"><div class="tl-dot"></div><div class="tl-content"><h3>3100 BCE</h3><p>Egypt unified under Pharaoh Narmer. The age of pyramids and divine kings begins.</p></div></div>
+      <div class="tl-item left"><div class="tl-dot"></div><div class="tl-content"><h3>2700 BCE</h3><p>The Epic of Gilgamesh is composed &#8212; the oldest written story in human history.</p></div></div>
+      <div class="tl-item right"><div class="tl-dot"></div><div class="tl-content"><h3>2560 BCE</h3><p>The Great Pyramid of Giza is completed. A monument to eternity that still stands.</p></div></div>
+      <div class="tl-item left"><div class="tl-dot"></div><div class="tl-content"><h3>1200 BCE</h3><p>The Trojan War. Homer's Iliad and Odyssey preserve the myths of gods and heroes.</p></div></div>
+      <div class="tl-item right"><div class="tl-dot"></div><div class="tl-content"><h3>800 BCE</h3><p>The Norse sagas begin to take shape in Scandinavia. Odin, Thor, and Loki enter legend.</p></div></div>
+      <div class="tl-item left"><div class="tl-dot"></div><div class="tl-content"><h3>500 BCE</h3><p>The golden age of Greek philosophy. Socrates, Plato, and Aristotle walk the earth.</p></div></div>
+      <div class="tl-item right"><div class="tl-dot"></div><div class="tl-content"><h3>200 BCE</h3><p>The Mahabharata and Ramayana are written in India &#8212; the greatest epics of Hindu mythology.</p></div></div>
+      <div class="tl-item left"><div class="tl-dot"></div><div class="tl-content"><h3>100 CE</h3><p>The Aztec and Maya civilizations flourish in Mesoamerica, building temples to the sun and stars.</p></div></div>
+      <div class="tl-item right"><div class="tl-dot"></div><div class="tl-content"><h3>700 CE</h3><p>The Norse Eddas are compiled. The myths of Ragnarok, creation, and the nine worlds are preserved.</p></div></div>
+    </div>
+  </section>
+
+  <!-- GODS ENCYCLOPEDIA -->
+  <section class="gods-section" id="gods">
+    <h2 class="section-title">&#10022; Encyclopedia of Gods &#10022;</h2>
+    <p class="section-sub">The divine beings who shaped the ancient world.</p>
+    <div class="gods-filter">
+      <button class="tag active" data-gfilter="all">All Pantheons</button>
+      <button class="tag" data-gfilter="greek">Greek</button>
+      <button class="tag" data-gfilter="norse">Norse</button>
+      <button class="tag" data-gfilter="egyptian">Egyptian</button>
+      <button class="tag" data-gfilter="japanese">Japanese</button>
+      <button class="tag" data-gfilter="hindu">Hindu</button>
+    </div>
+    <div class="gods-grid" id="godsGrid"></div>
+  </section>
+
+  <!-- GENRES -->
+  <section class="genres-section" id="genres">
+    <h2 class="section-title">&#10022; Browse by Genre &#10022;</h2>
+    <p class="section-sub">Every story has a soul. Find yours.</p>
+    <div class="genre-grid">
+      <div class="genre-card"><div class="genre-icon">&#127981;</div><h3>Mythology</h3><span class="genre-count">18 Stories</span></div>
+      <div class="genre-card"><div class="genre-icon">&#9876;</div><h3>War &amp; Battle</h3><span class="genre-count">12 Stories</span></div>
+      <div class="genre-card"><div class="genre-icon">&#10084;</div><h3>Ancient Romance</h3><span class="genre-count">8 Stories</span></div>
+      <div class="genre-card"><div class="genre-icon">&#128128;</div><h3>Dark &amp; Horror</h3><span class="genre-count">10 Stories</span></div>
+      <div class="genre-card"><div class="genre-icon">&#127758;</div><h3>Epic Adventure</h3><span class="genre-count">14 Stories</span></div>
+      <div class="genre-card"><div class="genre-icon">&#9775;</div><h3>Spiritual</h3><span class="genre-count">11 Stories</span></div>
+      <div class="genre-card"><div class="genre-icon">&#128081;</div><h3>Divine Kings</h3><span class="genre-count">7 Stories</span></div>
+      <div class="genre-card"><div class="genre-icon">&#127981;</div><h3>Creation Myths</h3><span class="genre-count">9 Stories</span></div>
+    </div>
+  </section>
+
+  <!-- COMICS -->
+  <section class="comics-section" id="comics">
+    <h2 class="section-title">&#10022; Ju-Him Comics &#10022;</h2>
+    <p class="section-sub">Ancient worlds drawn in ink and shadow.</p>
+    <div class="comics-grid" id="comicsGrid"></div>
+  </section>
+
+  <!-- ANCIENT WISDOM CARDS -->
+  <section class="wisdom-section">
+    <h2 class="section-title">&#10022; Ancient Wisdom &#10022;</h2>
+    <p class="section-sub">Words that have survived thousands of years for a reason.</p>
+    <div class="wisdom-grid">
+      <div class="wisdom-card"><p class="wisdom-quote">"Know thyself."</p><span class="wisdom-src">&#8212; Oracle of Delphi, Greece</span></div>
+      <div class="wisdom-card"><p class="wisdom-quote">"The flame that burns twice as bright burns half as long."</p><span class="wisdom-src">&#8212; Lao Tzu, China</span></div>
+      <div class="wisdom-card"><p class="wisdom-quote">"He who conquers himself is the mightiest warrior."</p><span class="wisdom-src">&#8212; Confucius, China</span></div>
+      <div class="wisdom-card"><p class="wisdom-quote">"Even the gods cannot change the past."</p><span class="wisdom-src">&#8212; Agathon, Greece</span></div>
+      <div class="wisdom-card"><p class="wisdom-quote">"The heart of man is the place the gods call home."</p><span class="wisdom-src">&#8212; Egyptian Proverb</span></div>
+      <div class="wisdom-card"><p class="wisdom-quote">"Fall seven times, stand up eight."</p><span class="wisdom-src">&#8212; Japanese Proverb</span></div>
+      <div class="wisdom-card"><p class="wisdom-quote">"Where the willingness is great, the difficulties cannot be great."</p><span class="wisdom-src">&#8212; Machiavelli</span></div>
+      <div class="wisdom-card"><p class="wisdom-quote">"The cave you fear to enter holds the treasure you seek."</p><span class="wisdom-src">&#8212; Joseph Campbell</span></div>
+    </div>
+  </section>
+
+  <!-- QUOTE -->
+  <section class="big-quote">
+    <div class="quote-border">
+      <p class="quote-text">&#21315;&#37324;&#12398;&#36947;&#12418;&#19968;&#27497;&#12363;&#12425;</p>
+      <p class="quote-translation">&#8212; A journey of a thousand miles begins with a single step &#8212;</p>
+    </div>
+  </section>
+
+  <!-- BLESSING -->
+  <section class="blessing" id="blessing">
+    <div class="blessing-inner">
+      <h2>&#10022; A Blessing Upon You &#10022;</h2>
+      <p>May your days be long and your burdens light.<br/>May every door you knock upon swing open wide.<br/>May the ancient spirits walk beside you<br/>in every trial, every triumph, every quiet night.<br/><br/><strong>You are seen. You are valued. You belong here.</strong></p>
+      <div class="seal">&#9775;</div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="brand-footer">Ju-Him</div>
+    <div class="rune-line">&#10008; &#10022; &#10008; &#10022; &#10008; &#10022; &#10008; &#10022; &#10008;</div>
+    <p>&#21476;&#20195;&#12398;&#39098;&#22495; &middot; The Ancient Realm &middot; Est. Before Time</p>
+    <p class="footer-sub">Crafted with reverence for all who wander &#8212; Ju-Him &copy; 2026</p>
+  </footer>
+
+</div>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="storyModal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal()">&#10005;</button>
+    <h2 class="modal-title" id="modalTitle"></h2>
+    <div class="modal-badge" id="modalBadge"></div>
+    <div class="modal-body" id="modalBody"></div>
+  </div>
+</div>
+
+<script src="data.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
